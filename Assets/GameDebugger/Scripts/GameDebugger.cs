@@ -8,7 +8,7 @@ public class GameDebugger
     private int counter = 0;
 
     public void Init() {
-        debuggerBehaviour = GameObject.FindObjectOfType<GameDebugBehaviour>();
+        debuggerBehaviour = GameDebugBehaviour.Init();
     }
 
     public void AddButton(string buttonName, System.Action OnClicked) {

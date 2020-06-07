@@ -8,7 +8,6 @@ public class GameDebugBehaviour : MonoBehaviour {
     
     public OnUpdateEvent OnUpdate;
 
-    public List<TextUpdate> TextUpdates { get; private set; }
     private GameObject DebugContent;
     private GameObject ConsoleContent;
 
@@ -18,11 +17,20 @@ public class GameDebugBehaviour : MonoBehaviour {
     private GameObject debugConsole;
     private GameObject consoleText;
 
-    private int counter = 0;    
+    private int counter = 0;
+
+    public static GameDebugBehaviour Init() {
+        Instantiate(Resources.Load<GameObject>("Debug Canvas"));
+
+        if(!GameObject.Find("EventSystem")) {
+            Instantiate(Resources.Load<GameObject>("EventSystem"));
+        }
+
+        return FindObjectOfType<GameDebugBehaviour>();
+    }
 
     private void Awake() {
         DebugContent = gameObject;
-        TextUpdates = new List<TextUpdate>();
 
         debugButton = Resources.Load<GameObject>("Debug Button");
         debugText = Resources.Load<GameObject>("Debug Text");
@@ -60,14 +68,6 @@ public class GameDebugBehaviour : MonoBehaviour {
         if(go != null)
             go.transform.SetParent(DebugContent.transform, false);
         return go;
-    }
-
-    public void UpdateText() {
-        foreach(var item in TextUpdates) {
-            if(item.IsUpdate) {
-                item.TextValue.text = item.StrValue;
-            }
-        }
     }
 
     private void HandleLog(string logString, string stackTrace, LogType type) {
