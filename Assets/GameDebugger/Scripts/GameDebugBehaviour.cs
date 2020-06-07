@@ -17,6 +17,8 @@ public class GameDebugBehaviour : MonoBehaviour {
     private GameObject debugConsole;
     private GameObject consoleText;
 
+    private ConsoleLog consoleLogs = new ConsoleLog();
+
     private int counter = 0;
 
     public static GameDebugBehaviour Init() {
@@ -70,14 +72,23 @@ public class GameDebugBehaviour : MonoBehaviour {
         return go;
     }
 
-    private void HandleLog(string logString, string stackTrace, LogType type) {
+    private void HandleLog(string logString, string stackTrace, LogType type)
+    {
         if (ConsoleContent == null)
             return;
+
+        AddConsoleLog(logString, stackTrace, type);
+
         GameObject log = Instantiate(consoleText);
         log.name = type + " - " + ++counter;
         log.transform.SetParent(ConsoleContent.transform, false);
         var LogText = log.GetComponent<Text>();
 
+        FormatLog(logString, stackTrace, type, LogText);
+    }
+
+    private void FormatLog(string logString, string stackTrace, LogType type, Text LogText)
+    {
         switch (type)
         {
             case LogType.Error:
@@ -96,6 +107,14 @@ public class GameDebugBehaviour : MonoBehaviour {
                 LogText.text = "\t" + type + " >> " + logString;
                 break;
         }
+    }
+
+    private void AddConsoleLog(string logString, string stackTrace, LogType type) {
+        consoleLogs.logs.Add(new Log {
+            LogString = logString,
+            StackTrace = stackTrace,
+            LogType = type.ToString()
+        });
     }
 
 }
