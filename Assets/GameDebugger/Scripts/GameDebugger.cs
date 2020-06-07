@@ -1,13 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class GameDebugger
 {
 
     private GameDebugBehaviour debuggerBehaviour;
-    private int counter;
+    private int counter = 0;
 
     public void Init() {
         debuggerBehaviour = GameObject.FindObjectOfType<GameDebugBehaviour>();
@@ -17,18 +15,21 @@ public class GameDebugger
         var go = debuggerBehaviour.InstantiateInCanvas(DebugType.Button);
         go.name = counter + " - " + buttonName;
         go.GetComponent<Button>().onClick.AddListener(() => OnClicked());
+        go.GetComponentInChildren<Text>().text = buttonName;
     }
 
-    public void AddText(string text, bool isUpdate = false) {
+    public void AddText(string text, System.Func<string> GetText) {
         var go = debuggerBehaviour.InstantiateInCanvas(DebugType.Text);
         var uiText = go.GetComponent<Text>();
-        debuggerBehaviour.TextUpdates.Add(
-            new TextUpdate { 
-                TextValue = uiText,
-                StrValue = text,
-                IsUpdate = isUpdate
-            }
-        );
+        uiText.text = GetText?.Invoke();
+        debuggerBehaviour.OnUpdate += () => uiText.text = GetText?.Invoke();
+        // debuggerBehaviour.TextUpdates.Add(
+        //     new TextUpdate { 
+        //         TextValue = uiText,
+        //         StrValue = text,
+        //         IsUpdate = isUpdate
+        //     }
+        // );
     }
 
     public void AddSeparator() {
