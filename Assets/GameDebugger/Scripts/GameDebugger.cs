@@ -45,4 +45,15 @@ public class GameDebugger
         debuggerBehaviour.InstantiateInCanvas(DebugType.Console);
     }
 
+    public void AddCopyLogButton() {
+        AddButton("Copy Logs", () => CopyText(""));
+    }
+
+    public void CopyText(string text) {
+        TextEditor te = new TextEditor();
+        te.text = text;
+        te.SelectAll();
+        te.Copy();
+    }
+
 }
