@@ -19,10 +19,24 @@ public class GameDebugger
         go.GetComponent<Button>().onClick.AddListener(() => OnClicked());
     }
 
-    public void AddText(string text, bool isUpdate) {
-        
+    public void AddText(string text, bool isUpdate = false) {
+        var go = debuggerBehaviour.InstantiateInCanvas(DebugType.Text);
+        var uiText = go.GetComponent<Text>();
+        debuggerBehaviour.TextUpdates.Add(
+            new TextUpdate { 
+                TextValue = uiText,
+                StrValue = text,
+                IsUpdate = isUpdate
+            }
+        );
     }
 
-    
+    public void AddSeparator() {
+        debuggerBehaviour.InstantiateInCanvas(DebugType.Separator);
+    }
+
+    public void AddConsole() {
+        debuggerBehaviour.InstantiateInCanvas(DebugType.Console);
+    }
 
 }
