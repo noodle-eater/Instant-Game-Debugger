@@ -18,18 +18,23 @@ public class GameDebugger
         go.GetComponentInChildren<Text>().text = buttonName;
     }
 
-    public void AddText(string text, System.Func<string> GetText) {
+    ///<summary>
+    /// Add an interactive text that will be updated each frame.
+    ///</summary>
+    public void AddText(System.Func<string> GetText) {
         var go = debuggerBehaviour.InstantiateInCanvas(DebugType.Text);
         var uiText = go.GetComponent<Text>();
         uiText.text = GetText?.Invoke();
         debuggerBehaviour.OnUpdate += () => uiText.text = GetText?.Invoke();
-        // debuggerBehaviour.TextUpdates.Add(
-        //     new TextUpdate { 
-        //         TextValue = uiText,
-        //         StrValue = text,
-        //         IsUpdate = isUpdate
-        //     }
-        // );
+    }
+
+    /// <summary>
+    /// Add static text.
+    ///</summary>
+    public void AddText(string text) {
+        var go = debuggerBehaviour.InstantiateInCanvas(DebugType.Text);
+        var uiText = go.GetComponent<Text>();
+        uiText.text = text;
     }
 
     public void AddSeparator() {
