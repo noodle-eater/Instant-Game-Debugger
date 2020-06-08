@@ -8,7 +8,6 @@ public class GameDebugBehaviour : MonoBehaviour {
     
     public OnUpdateEvent OnUpdate;
 
-    private GameObject DebugContent;
     private GameObject ConsoleContent;
 
     private GameObject debugButton;
@@ -32,8 +31,6 @@ public class GameDebugBehaviour : MonoBehaviour {
     }
 
     private void Awake() {
-        DebugContent = gameObject;
-
         debugButton = Resources.Load<GameObject>("Debug Button");
         debugText = Resources.Load<GameObject>("Debug Text");
         debugSeparator = Resources.Load<GameObject>("Debug Separator");
@@ -68,7 +65,7 @@ public class GameDebugBehaviour : MonoBehaviour {
         }
 
         if(go != null)
-            go.transform.SetParent(DebugContent.transform, false);
+            go.transform.SetParent(transform, false);
         return go;
     }
 
@@ -92,19 +89,19 @@ public class GameDebugBehaviour : MonoBehaviour {
         switch (type)
         {
             case LogType.Error:
-                LogText.text = "\t<color=red>" + type + " >> " + logString + "\n" + stackTrace + "</color>";
+                LogText.text = "<color=red>" + type + " >> " + logString + "\n" + stackTrace + "</color>";
                 break;
             case LogType.Exception:
-                LogText.text = "\t<color=red>" + type + " >> " + logString + "\n" + stackTrace + "</color>";
+                LogText.text = "<color=red>" + type + " >> " + logString + "\n" + stackTrace + "</color>";
                 break;
             case LogType.Warning:
-                LogText.text = "\t<color=yellow>" + type + " >> " + logString + "\n" + stackTrace + "</color>";
+                LogText.text = "<color=yellow>" + type + " >> " + logString + "\n" + stackTrace + "</color>";
                 break;
             case LogType.Log:
-                LogText.text = "\t" + type + " >> " + logString;
+                LogText.text = type + " >> " + logString;
                 break;
             case LogType.Assert:
-                LogText.text = "\t" + type + " >> " + logString;
+                LogText.text = type + " >> " + logString;
                 break;
         }
     }
