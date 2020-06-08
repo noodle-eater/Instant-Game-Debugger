@@ -15,6 +15,7 @@ public class DebugExample : MonoBehaviour
         debug.AddText(() => "Counter : " + counter);
         debug.AddButton("Add", () => { counter++; Debug.Log("Counter " + counter); });
         debug.AddButton("Trigger Error", () => list.Add("Empty"));
+        // debug.AddButton("Copy Console Log", () => debug.CopyConsoleLog("Waw I can copy"));
         debug.AddConsole();
     }
 }
