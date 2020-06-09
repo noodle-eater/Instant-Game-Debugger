@@ -1,7 +1,7 @@
 # Instant Game Debugger
 An Instant, Simple &amp; Ready to use Unity In-Game Debugger &amp; Console. We already have some in-game console in unity asset store. But sometimes I find bug that I do not have a time to fix it. And I found my self repeating stacking a UI in Unity to test thirdparty features, like the one in [Ads Framework](https://github.com/AmdHamdani/Ads-Framework). So this debugger is the extension version of the UI I stacked in the [Ads Framework](https://github.com/AmdHamdani/Ads-Framework). Beside it, I just want to see the log from my game, so if the in-game console I get from asset store not working, I do not want to spend my time fixing it. So I decide to make this fun little thing. And the main reason is of course because I love doing this. By the way, Thank you for :) take a look or try this tiny debugger. Feel free to reach me or create an issue if you have any suggestion, feedback or report.
 
-## Example
+## A. Example
 
 ### Code 
 
@@ -28,7 +28,7 @@ public class DebugExample : MonoBehaviour
 
 ![example](https://github.com/AmdHamdani/Instant-Game-Debugger/blob/develop/images/example.png)
 
-## Documentation
+## B. Documentation
 
 ### 1. Init
 
@@ -82,7 +82,7 @@ public void AddConsole()
 
 All the debugger UI & console here I usually used for testing thirdparty features in Android in potrait mode. So, all available UI here is fit in potrait mode. You can change it from the prefab directly, e.g if you want to use it in landscape mode, just open the `Debug Canvas` prefabs. Change the `Reference Resolution` in `Canvas Scaller`.
 
-## Next Features
+## C. Next Features
 
 - [ ] Drop Down
 - [ ] Show Console on Error
