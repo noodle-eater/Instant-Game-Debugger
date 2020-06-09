@@ -26,7 +26,7 @@ public class DebugExample : MonoBehaviour
 
 ### Result
 
-![example](\images\example.png)
+![example](https://github.com/AmdHamdani/Instant-Game-Debugger/blob/develop/images/example.png)
 
 ## Documentation
 
