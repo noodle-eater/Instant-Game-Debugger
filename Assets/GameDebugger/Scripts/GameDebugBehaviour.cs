@@ -8,17 +8,11 @@ public class GameDebugBehaviour : MonoBehaviour {
     
     public OnUpdateEvent OnUpdate;
 
-    private GameObject ConsoleContent;
+    private GameObject _consoleContent;
+    private DebugUI _debugUI = new DebugUI();
+    private ConsoleLog _consoleLogs = new ConsoleLog();
 
-    private GameObject debugButton;
-    private GameObject debugText;
-    private GameObject debugSeparator;
-    private GameObject debugConsole;
-    private GameObject consoleText;
-
-    private ConsoleLog consoleLogs = new ConsoleLog();
-
-    private int counter = 0;
+    private int _counter = 0;
 
     public static GameDebugBehaviour Init() {
         Instantiate(Resources.Load<GameObject>("Debug Canvas"));
@@ -31,12 +25,7 @@ public class GameDebugBehaviour : MonoBehaviour {
     }
 
     private void Awake() {
-        debugButton = Resources.Load<GameObject>("Debug Button");
-        debugText = Resources.Load<GameObject>("Debug Text");
-        debugSeparator = Resources.Load<GameObject>("Debug Separator");
-        debugConsole = Resources.Load<GameObject>("Debug Console");
-        consoleText = Resources.Load<GameObject>("Console Text");
-
+        _debugUI.Init();
         Application.logMessageReceived += HandleLog;
     }
 
@@ -48,18 +37,21 @@ public class GameDebugBehaviour : MonoBehaviour {
         GameObject go = null;
         switch(type) {
             case DebugType.Button : 
-                go = Instantiate(debugButton);
+                go = Instantiate(_debugUI.Button);
                 break;
             case DebugType.Separator : 
-                go = Instantiate(debugSeparator);
+                go = Instantiate(_debugUI.Separator);
                 break;
             case DebugType.Text : 
-                go = Instantiate(debugText);
+                go = Instantiate(_debugUI.Text);
+                break;
+            case DebugType.Dropdown:
+                go = Instantiate(_debugUI.Dropdown);
                 break;
             case DebugType.Console : 
-                go = Instantiate(debugConsole);
-                if(ConsoleContent == null) {
-                    ConsoleContent = GameObject.Find("Console Content");
+                go = Instantiate(_debugUI.Console);
+                if(_consoleContent == null) {
+                    _consoleContent = GameObject.Find("Console Content");
                 }
                 break;
         }
@@ -71,14 +63,14 @@ public class GameDebugBehaviour : MonoBehaviour {
 
     private void HandleLog(string logString, string stackTrace, LogType type)
     {
-        if (ConsoleContent == null)
+        if (_consoleContent == null)
             return;
 
         AddConsoleLog(logString, stackTrace, type);
 
-        GameObject log = Instantiate(consoleText);
-        log.name = type + " - " + ++counter;
-        log.transform.SetParent(ConsoleContent.transform, false);
+        GameObject log = Instantiate(_debugUI.ConsoleText);
+        log.name = type + " - " + ++_counter;
+        log.transform.SetParent(_consoleContent.transform, false);
         var LogText = log.GetComponent<Text>();
 
         FormatLog(logString, stackTrace, type, LogText);
@@ -107,7 +99,7 @@ public class GameDebugBehaviour : MonoBehaviour {
     }
 
     private void AddConsoleLog(string logString, string stackTrace, LogType type) {
-        consoleLogs.logs.Add(new Log {
+        _consoleLogs.logs.Add(new Log {
             LogString = logString,
             StackTrace = stackTrace,
             LogType = type.ToString()
