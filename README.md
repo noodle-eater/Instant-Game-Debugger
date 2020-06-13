@@ -11,6 +11,7 @@ using UnityEngine;
 public class DebugExample : MonoBehaviour
 {
     private int counter = 0;
+    private string[] foods = new string[] { "Apple", "Orange", "Noodle"};
     
     private void Start() {
         var debug = new GameDebugger();
@@ -19,6 +20,7 @@ public class DebugExample : MonoBehaviour
         debug.AddText("In Game Debugger");
         debug.AddText(() => "Counter : " + counter);
         debug.AddButton("Add", () => { counter++; Debug.Log("Counter " + counter); });
+        debug.AddDropDown(foods, (index) => Debug.Log("I want to eat " + foods[index]));
         debug.AddConsole();
     }
 }
@@ -70,7 +72,15 @@ Add black straight line to separate UI.
 public void AddSeparator()
 ```
 
-### 6. Console
+### 6. Dropdown
+
+Add a dropdown choice in debug UI.
+
+```c#
+public void AddDropDown(string[] options, System.Action<int> OnOptionSelected)
+```
+
+### 7. Console
 
 Add small console window in debugger.
 
@@ -78,13 +88,13 @@ Add small console window in debugger.
 public void AddConsole()
 ```
 
-### 7. Additional
+### 8. Additional
 
 All the debugger UI & console here I usually used for testing thirdparty features in Android in potrait mode. So, all available UI here is fit in potrait mode. You can change it from the prefab directly, e.g if you want to use it in landscape mode, just open the `Debug Canvas` prefabs. Change the `Reference Resolution` in `Canvas Scaller`.
 
 ## C. Next Features
 
-- [ ] Drop Down
+- [x] Drop Down
 - [ ] Show Console on Error
 - [ ] Debugger Config
 - [ ] Potrait & Landscape UI Mode

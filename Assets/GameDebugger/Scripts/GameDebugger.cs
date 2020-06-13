@@ -51,6 +51,9 @@ public class GameDebugger
         debuggerBehaviour.InstantiateInCanvas(DebugType.Separator);
     }
 
+    /// <summary>
+    /// Add a dropdown choince into the debugger UI.
+    /// </summary>
     public void AddDropDown(string[] options, System.Action<int> OnOptionSelected) {
         var go = debuggerBehaviour.InstantiateInCanvas(DebugType.Dropdown);
         var dropdown = go.GetComponent<Dropdown>();
