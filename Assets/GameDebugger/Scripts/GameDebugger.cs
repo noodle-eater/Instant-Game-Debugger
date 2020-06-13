@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class GameDebugger
@@ -48,6 +49,19 @@ public class GameDebugger
     /// </summary>
     public void AddSeparator() {
         debuggerBehaviour.InstantiateInCanvas(DebugType.Separator);
+    }
+
+    public void AddDropDown(string[] options, System.Action<int> OnOptionSelected) {
+        var go = debuggerBehaviour.InstantiateInCanvas(DebugType.Dropdown);
+        var dropdown = go.GetComponent<Dropdown>();
+        var data = new List<Dropdown.OptionData>();
+        
+        for(int i = 0; i < options.Length; i++) {
+            data.Add(new Dropdown.OptionData(options[i]));
+        }
+
+        dropdown.options = data;
+        dropdown.onValueChanged.AddListener((selectedIndex) => OnOptionSelected?.Invoke(selectedIndex));
     }
 
     /// <summary>
