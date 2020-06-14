@@ -74,25 +74,23 @@ public class GameDebugger
         debuggerBehaviour.InstantiateInCanvas(DebugType.Console);
     }
 
-    #region In Development
-    /// <summary>
-    /// In Development
-    /// </summary>
-    [System.Obsolete("In Development")]
-    public void AddCopyLogButton() {
-        AddButton("Copy Logs", () => CopyText(""));
+    public void CopyLogToClipboard() {
+        CopyText(debuggerBehaviour.ConsoleLogToJson());
+        Debug.Log("Console Logs is Copied to Clipboard");
+    }
+
+    public override string ToString() {
+        return debuggerBehaviour.ConsoleLogToJson();
     }
 
     /// <summary>
-    /// In Development
+    /// Copy a given string.
     /// </summary>
-    [System.Obsolete("In Development")]
-    public void CopyText(string text) {
+    private void CopyText(string text) {
         TextEditor te = new TextEditor();
         te.text = text;
         te.SelectAll();
         te.Copy();
     }
-    #endregion
 
 }
