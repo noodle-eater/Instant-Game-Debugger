@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using InGameDebugger;
 using UnityEngine;
 
 public class DebugExample : MonoBehaviour

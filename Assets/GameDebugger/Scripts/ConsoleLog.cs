@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 
-[System.Serializable]
-public class ConsoleLog {
-    public List<Log> logs = new List<Log>();
+namespace InGameDebugger {
+    [System.Serializable]
+    internal class ConsoleLog {
+        public List<Log> logs = new List<Log>();
+    }
+
 }

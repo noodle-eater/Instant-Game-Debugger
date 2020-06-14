@@ -1,8 +1,10 @@
 using UnityEngine;
 
-public static class Utility {
-    
-    public static string ToJson(this ConsoleLog consoleLog) {
-        return JsonUtility.ToJson(consoleLog, true);
+namespace InGameDebugger {    
+    internal static class Utility {
+        
+        internal static string ToJson(this ConsoleLog consoleLog) {
+            return JsonUtility.ToJson(consoleLog, true);
+        }
     }
 }

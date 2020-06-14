@@ -1,7 +1,9 @@
-public enum DebugType {
-    Button,
-    Text,
-    Separator,
-    Dropdown,
-    Console
+namespace InGameDebugger {
+    internal enum DebugType {
+        Button,
+        Text,
+        Separator,
+        Dropdown,
+        Console
+    }
 }
