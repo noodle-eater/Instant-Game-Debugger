@@ -98,4 +98,5 @@ All the debugger UI & console here I usually used for testing thirdparty feature
 - [ ] Show Console on Error
 - [ ] Debugger Config
 - [ ] Potrait & Landscape UI Mode
+- [x] Copy log to clipboard
 
