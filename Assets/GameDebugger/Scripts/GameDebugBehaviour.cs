@@ -106,4 +106,9 @@ public class GameDebugBehaviour : MonoBehaviour {
         });
     }
 
+    internal string ConsoleLogToJson()
+    {
+        return _consoleLogs.ToJson();
+    }
+
 }
